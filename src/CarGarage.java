@@ -32,6 +32,8 @@ public class CarGarage {
 
         JTextArea textArea = new JTextArea(sb.toString());
         textArea.setEditable(false);
+        textArea.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 16));
+
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new java.awt.Dimension(200, 200));
 
@@ -39,7 +41,6 @@ public class CarGarage {
     }
 
     public void deleteCar() {
-
         if (cars.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No cars to delete.");
             return;
@@ -61,24 +62,25 @@ public class CarGarage {
                 carOptions[0]
         );
 
-        if (selectedCar == null) {
-            return;
-        }
+        if (selectedCar == null) return;
 
-        int selectedIndex = -1;
-        for (int i = 0; i < carOptions.length; i++) {
-            if (carOptions[i].equals(selectedCar)) {
-                selectedIndex = i;
-                break;
-            }
-        }
+        int index = Integer.parseInt(selectedCar.split(":")[0]) - 1;
+        Car carToDelete = cars.get(index);
 
-        if (selectedIndex != -1) {
-            cars.remove(selectedIndex);
+        int confirm = JOptionPane.showConfirmDialog(
+                null,
+                "Do you really want to delete " + carToDelete.getBrand() + " " + carToDelete.getModel() + " (" + carToDelete.getYear() + ")?",
+                "Confirm Deletion",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            cars.remove(index);
             JOptionPane.showMessageDialog(null, "Car deleted.");
         } else {
-            JOptionPane.showMessageDialog(null, "Error deleting car.");
+            JOptionPane.showMessageDialog(null, "Deletion canceled.");
         }
     }
+
 
 }
