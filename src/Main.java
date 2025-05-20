@@ -27,7 +27,18 @@ public class Main {
 
             switch (choice) {
                 case 0:
-                    cars.addCar();
+                    int confirm = JOptionPane.showConfirmDialog(
+                            null,
+                            "Would you like to register a new car?",
+                            "Confirm Registration",
+                            JOptionPane.YES_NO_OPTION
+                    );
+
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        cars.addCar();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Car registration cancelled.");
+                    }
                     break;
                 case 1:
                     cars.allCars();
