@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import javax.swing.*;
 
 public class CarGarage {
 
@@ -15,22 +16,26 @@ public class CarGarage {
     }
 
     public void allCars() {
-
         if (cars.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(null, "No cars on list.");
+            JOptionPane.showMessageDialog(null, "No cars on list.");
             return;
         }
 
-        StringBuilder sb = new StringBuilder("All cars:\n");
+        StringBuilder sb = new StringBuilder("All cars:\n\n");
         for (int i = 0; i < cars.size(); i++) {
             Car car = cars.get(i);
             sb.append(i + 1).append(": ")
                     .append(car.getBrand()).append(" ")
-                    .append(car.getModel()).append(" (").append(car.getYear()).append(")\n");
+                    .append(car.getModel()).append(" (")
+                    .append(car.getYear()).append(")\n");
         }
 
-        String input = javax.swing.JOptionPane.showInputDialog(sb.toString());
-        if (input == null) return;
+        JTextArea textArea = new JTextArea(sb.toString());
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        JOptionPane.showMessageDialog(null, scrollPane, "All Cars", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void deleteCar() {

@@ -1,44 +1,48 @@
 
-
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        //Car car = new Car();
-        //car.regCar();
-
         CarGarage cars = new CarGarage();
 
+        String[] options = {"Add new car", "Show all cars", "Delete car", "Exit"};
 
         while (true) {
-            String chois = javax.swing.JOptionPane.showInputDialog("Enter number: \n1: Add new car \n2: Show all cars \n3: Delete car \n 4: Exit");
+            int choice = JOptionPane.showOptionDialog(
+                    null,
+                    "Choose an action:",
+                    "Car Garage Menu",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+            );
 
-            if (chois == null) {
-                return;
+            if (choice == -1 || choice == 3) {
+                JOptionPane.showMessageDialog(null, "Goodbye!");
+                break;
             }
 
-            try {
-                int chois1 = Integer.parseInt(chois);
-
-                if (chois1 == 1) {
+            switch (choice) {
+                case 0:
                     cars.addCar();
-                } else if (chois1 == 2) {
-                    cars.allCars();
-                } else if (chois1 == 3) {
-                    cars.deleteCar();
-                } else if (chois1 == 4) {
-                    javax.swing.JOptionPane.showMessageDialog(null, "Goodbye!");
                     break;
-                }
-
-            } catch (NumberFormatException e) {
-                javax.swing.JOptionPane.showMessageDialog(null, "Please enter valid numbers for chois");
+                case 1:
+                    cars.allCars();
+                    break;
+                case 2:
+                    cars.deleteCar();
+                    break;
+                default:
+                    break;
             }
-
-
         }
 
+
     }
-
-
 }
+
+
+
