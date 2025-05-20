@@ -11,7 +11,7 @@ public class Main {
         while (true) {
             int choice = JOptionPane.showOptionDialog(
                     null,
-                    "Choose an action:",
+                    null,
                     "Car Garage Menu",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.PLAIN_MESSAGE,

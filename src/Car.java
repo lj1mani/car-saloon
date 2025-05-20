@@ -74,7 +74,7 @@ public class Car {
                 javax.swing.JOptionPane.showMessageDialog(null, "Year must be exactly 4 digits (e.g. 2023).");
                 continue;
             }
-            
+
             try {
                 year1 = Integer.parseInt(year);
                 break;

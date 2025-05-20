@@ -39,35 +39,46 @@ public class CarGarage {
     }
 
     public void deleteCar() {
+
         if (cars.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(null, "No cars to delete.");
+            JOptionPane.showMessageDialog(null, "No cars to delete.");
             return;
         }
 
-        StringBuilder sb = new StringBuilder("Select a car to delete:\n");
+        String[] carOptions = new String[cars.size()];
         for (int i = 0; i < cars.size(); i++) {
             Car car = cars.get(i);
-            sb.append(i + 1).append(": ")
-                    .append(car.getBrand()).append(" ")
-                    .append(car.getModel()).append(" (").append(car.getYear()).append(")\n");
+            carOptions[i] = (i + 1) + ": " + car.getBrand() + " " + car.getModel() + " (" + car.getYear() + ")";
         }
 
-        String input = javax.swing.JOptionPane.showInputDialog(sb.toString() + "\nEnter the number of the car to delete:");
-        if (input == null) return;
+        String selectedCar = (String) JOptionPane.showInputDialog(
+                null,
+                "Select a car to delete:",
+                "Delete Car",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                carOptions,
+                carOptions[0]
+        );
 
-        try {
-            int index = Integer.parseInt(input);
-            index = index - 1;
-            if (index >= 0 && index < cars.size()) {
-                cars.remove(index);
-                javax.swing.JOptionPane.showMessageDialog(null, "Car deleted.");
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(null, "Invalid index.");
+        if (selectedCar == null) {
+            return;
+        }
+
+        int selectedIndex = -1;
+        for (int i = 0; i < carOptions.length; i++) {
+            if (carOptions[i].equals(selectedCar)) {
+                selectedIndex = i;
+                break;
             }
-        } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Please enter a valid number.");
         }
 
-
+        if (selectedIndex != -1) {
+            cars.remove(selectedIndex);
+            JOptionPane.showMessageDialog(null, "Car deleted.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error deleting car.");
+        }
     }
+
 }
